@@ -14,12 +14,26 @@ RUN apt-get update && apt-get install -y \
 
 # Set working directory
 WORKDIR /app
+#RUN mkdir -p /opt/pc_monolayer/config &&\
+#    chmod -R 777 /opt/pc_monolayer
 
 # Copy source files
 COPY . .
+#COPY ./config/* /opt/pc_monolayer/config/
+#COPY ./rwh2.xml .
+#COPY ./config/* .
+#COPY ./rwh2.xml ./config/PhysiCell.xml
 
 # Compile the project
 RUN make
+#COPY ./project /opt/pc_monolayer/
+#COPY ./project .
+RUN chmod +x project
+
 
 # Default command (run the compiled program or bash)
-CMD ["make", "project"]
+#CMD ["make"]
+#CMD ["./project ./rwh2.xml"]
+#CMD ["./project rwh2.xml"]
+CMD ["./project"]
+#ENTRYPOINT ["./project"]
